@@ -50,7 +50,7 @@ func stringInSlice(a string, list []string) bool {
 func toFloat(str string) float64  { num, _ := strconv.ParseFloat(str, 64); return num }
 func toString(num float64) string { return strconv.FormatFloat(num, 'f', -1, 64) }
 
-func calculate(expression string) float64 {
+func calculate(expression string) string {
 	expression = strings.ReplaceAll(expression, " ", "")
 	precedence := []string{"^", "*/", "+-"}
 	tokenized_expression := toTokens(expression)
@@ -59,7 +59,6 @@ func calculate(expression string) float64 {
 		for stringInSlice(operator[0:1], tokenized_expression) || stringInSlice(operator[1:], tokenized_expression) {
 			for c, token := range tokenized_expression {
 				if strings.ContainsAny(operator, token) {
-					println(token)
 					num1 := toFloat(tokenized_expression[c-1])
 					num2 := toFloat(tokenized_expression[c+1])
 					tokenized_expression[c-1] = toString(operate(num1, num2, token))
@@ -69,11 +68,7 @@ func calculate(expression string) float64 {
 		}
 	}
 
-	return toFloat(tokenized_expression[0])
+	return tokenized_expression[0]
 }
 
-func main() {
-	println(
-		calculate("2^3^4+1.5*4"),
-	)
-}
+func main() { println(calculate("2^3^4+1.5*4")) }
