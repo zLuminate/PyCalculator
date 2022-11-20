@@ -6,31 +6,6 @@ import (
 	"strings"
 )
 
-func operate(num1 float64, num2 float64, op string) float64 {
-	switch op {
-	case "+":
-		return num1 + num2
-	case "-":
-		return num1 - num2
-	case "*":
-		return num1 * num2
-	case "/":
-		return num1 / num2
-	case "^":
-		return math.Pow(num1, num2)
-	default:
-		return 0
-	}
-}
-
-func theSmallerOf(num1 float64, num2 float64) float64 {
-	if num1 < num2 {
-		return num1
-	} else {
-		return num2
-	}
-}
-
 func toTokens(expression string) []string {
 	tokens := []string{}
 
@@ -48,7 +23,29 @@ func toTokens(expression string) []string {
 
 	return tokens
 }
-
+func operate(num1 float64, num2 float64, op string) float64 {
+	switch op {
+	case "+":
+		return num1 + num2
+	case "-":
+		return num1 - num2
+	case "*":
+		return num1 * num2
+	case "/":
+		return num1 / num2
+	case "^":
+		return math.Pow(num1, num2)
+	default:
+		return 0
+	}
+}
+func theSmallerOf(num1 float64, num2 float64) float64 {
+	if num1 < num2 {
+		return num1
+	} else {
+		return num2
+	}
+}
 func stringInSlice(a string, list []string) bool {
 	for _, b := range list {
 		if b == a {
@@ -57,15 +54,8 @@ func stringInSlice(a string, list []string) bool {
 	}
 	return false
 }
-
-func toFloat(str string) float64 {
-	num, _ := strconv.ParseFloat(str, 64)
-	return num
-}
-
-func toString(num float64) string {
-	return strconv.FormatFloat(num, 'f', -1, 64)
-}
+func toFloat(str string) float64  { num, _ := strconv.ParseFloat(str, 64); return num }
+func toString(num float64) string { return strconv.FormatFloat(num, 'f', -1, 64) }
 
 func calculate(expression string) float64 {
 	expression = strings.ReplaceAll(expression, " ", "")
